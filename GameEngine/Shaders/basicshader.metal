@@ -15,10 +15,15 @@ struct ModelConstant {
     float4x4 modelMatrix;
 };
 
+struct SceneConstants {
+    float4x4 viewMatrix;
+};
+
 vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
-                                          constant ModelConstant &modelConstant [[ buffer(1) ]] ) {
+                                          constant SceneConstants &sceneConstant [[ buffer(1) ]],
+                                          constant ModelConstant &modelConstant [[ buffer(2) ]] ) {
     RasterizerData rd;
-    rd.position = modelConstant.modelMatrix * float4(vIn.position, 1);
+    rd.position = sceneConstant.viewMatrix * modelConstant.modelMatrix * float4(vIn.position, 1);
     rd.color = vIn.color;
 
     return rd;
