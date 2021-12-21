@@ -13,7 +13,7 @@ public enum RenderPipelineStateTypes {
 
 protocol RenderPipelineState {
     var name: String { get }
-    var renderPipelineState: MTLRenderPipelineState { get }
+    var renderPipelineState: MTLRenderPipelineState! { get }
 }
 
 public class RenderPipelineStateLibrary {
@@ -37,12 +37,11 @@ public class RenderPipelineStateLibrary {
 struct BasicRenderPipelineState: RenderPipelineState {
     var name: String =  "Basic Render Pipeline State"
 
-    var renderPipelineState: MTLRenderPipelineState {
+    var renderPipelineState: MTLRenderPipelineState!
+
+    init() {
         let descriptor = RenderPipelineDescriptorLibrary.renderPipelineDescriptorFor(.basic)
-        let renderPipelineState = try! Engine.device.makeRenderPipelineState(descriptor: descriptor)
-        return renderPipelineState
+        renderPipelineState = try! Engine.device.makeRenderPipelineState(descriptor: descriptor)
     }
-
-
 
 }

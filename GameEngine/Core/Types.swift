@@ -28,8 +28,8 @@ extension Sizeable {
 
 // MARK: - Vertex
 struct Vertex: Sizeable {
-    var position: SIMD3<Float> // 16 Byte
-    var color: SIMD4<Float>
+    var position: float3 // 16 Byte
+    var color: float4
 }
 
 // SMID<T> extension
@@ -44,3 +44,9 @@ extension Float: Sizeable {}
 struct ModelConstants: Sizeable {
     var modelMatrix = matrix_identity_float4x4
 }
+
+
+// MARK: - SIMD types
+public typealias float3 = SIMD3<Float>
+public typealias float4 = SIMD4<Float>
+public typealias float2 = SIMD2<Float>

@@ -24,5 +24,6 @@ class Engine {
         RenderPipelineDescriptorLibrary.initialize()
         RenderPipelineStateLibrary.initialize()
         MeshLibrary.Initialize()
+        SceneManager.initialize(Preferences.startingSceneType)
     }
 }

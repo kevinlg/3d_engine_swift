@@ -17,4 +17,5 @@ class Preferences {
 
     static var clearColr = ClearClolors.black
     static var mainPixelFormat = MTLPixelFormat.bgra8Unorm
+    static var startingSceneType = SceneTypes.sandbox
 }

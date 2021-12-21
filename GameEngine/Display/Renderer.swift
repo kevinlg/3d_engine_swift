@@ -9,7 +9,19 @@ import MetalKit
 
 class Renderer: NSObject, MTKViewDelegate {
 
-    var player = Player()
+
+    public static var screenSize: float2 = float2(repeating: 0)
+
+    init(_ view: MTKView) {
+        super.init()
+        updateScreenSize(view: view)
+    }
+
+
+
+    public func updateScreenSize(view: MTKView) {
+        Renderer.screenSize = float2(Float(view.bounds.width), Float(view.bounds.height))
+    }
 
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         // When the window is resize
@@ -28,8 +40,9 @@ class Renderer: NSObject, MTKViewDelegate {
             fatalError("could not create a MTLRenderCommandEncoder")
         }
 
-        player.update(deltaTime: 1 / Float(view.preferredFramesPerSecond))
-        player.render(renderCommandEncoder: renderCommandEncoder)
+        let deltaTime =  1 / Float(view.preferredFramesPerSecond)
+        SceneManager.tickScene(renderCommandEncoder: renderCommandEncoder, deltaTime: deltaTime)
+
         renderCommandEncoder.endEncoding()
 
         commandBuffer?.present(drawable)
